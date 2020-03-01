@@ -1,29 +1,18 @@
-const TelegramBot = require('node-telegram-bot-api');
 
-// replace the value below with the Telegram token you receive from @BotFather
-const token = '1101047308:AAGQMrfkXCWT_qHYV-tS8pUOuBXvIYvAJpM';
+const Telegraf = require('telegraf')
+const Telegram = require('telegraf/telegram')
 
-// Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling: true});
+var arr = [];
 
-// Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
+const bot = new Telegraf('1101047308:AAGQMrfkXCWT_qHYV-tS8pUOuBXvIYvAJpM')
+const telegram = new Telegram('1101047308:AAGQMrfkXCWT_qHYV-tS8pUOuBXvIYvAJpM');
+// bot.on('text', (ctx) => {
+//   arr.push(ctx.message.text)
+//   return  ctx.reply(arr)})
 
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
-});
-
-// Listen for any kind of message. There are different kinds of
-// messages.
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
-});
+bot.hears(['hi','Hi','Hello'], (ctx) => {
+  arr.push(ctx.message.text)
+ return telegram.sendContact(ctx.message.chat.id, 'phoneNumber', 'firstName', []) 
+  //return  ctx.reply(ctx.message.chat.id)
+})
+bot.launch()
