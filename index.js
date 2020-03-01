@@ -1,11 +1,9 @@
 
 const Telegraf = require('telegraf')
-const Telegram = require('telegraf/telegram')
 
 var arr = [];
 
-const bot = new Telegraf('1101047308:AAGQMrfkXCWT_qHYV-tS8pUOuBXvIYvAJpM')
-const telegram = new Telegram('1101047308:AAGQMrfkXCWT_qHYV-tS8pUOuBXvIYvAJpM');
+const bot = new Telegraf('1110421699:AAE8L56x_dq1zcXDcJvhanwMhXsSC3ds-FU')
 bot.on('text', (ctx) => {
   arr.push(ctx.message.text)
   return  ctx.reply(arr)})
